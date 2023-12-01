@@ -5,3 +5,11 @@ export type StringObject = {
 }
 
 export type setStrArrayArgumentType = StringObject[]
+
+//fibonacci
+export type FibonacciObjectType = {
+  value?: string
+  index?: number
+}
+
+export type setNumArrayArgumentType = FibonacciObjectType[]

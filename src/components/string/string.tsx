@@ -38,7 +38,7 @@ export const StringComponent: React.FC = () => {
             isLoader={isLoader}
           />
         </form>
-        <ul className={styles.circle}>
+        <ul className={styles.circles}>
           {
             strArray.length > 0 &&
             strArray.map((item, index) => {
