@@ -12,3 +12,7 @@ export const setStateWithPause = async (
   await pause(delay)
   setState([...argument])
 }
+
+export const randomArr = () => {
+  
+}
