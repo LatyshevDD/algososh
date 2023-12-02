@@ -1,3 +1,5 @@
+import { ElementStates } from "./element-states"
+
 // string
 export type StringObject = {
   value: string
@@ -13,3 +15,11 @@ export type FibonacciObjectType = {
 }
 
 export type setNumArrayArgumentType = FibonacciObjectType[]
+
+//sorting
+export type SortingObjectType = {
+  index: number
+  state: ElementStates
+}
+
+export type setArrayArgumentType = SortingObjectType[]

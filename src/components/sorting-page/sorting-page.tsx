@@ -1,14 +1,18 @@
 import React from "react"
 import { Button } from "../ui/button/button"
 import { RadioInput } from "../ui/radio-input/radio-input"
+import { Column } from "../ui/column/column"
 import styles from './sorting-page.module.css'
 import { SolutionLayout } from "../ui/solution-layout/solution-layout"
 import { useState } from "react"
 import { Direction } from "../../types/direction"
+import { randomArr } from "../../utils/utils"
+import { setArrayArgumentType } from "../../types/types"
 
 export const SortingPage: React.FC = () => {
 
   const [sortAlgorithm, setSortAlgorithm] = useState('Выбор')
+  const [array, setArray] = useState<setArrayArgumentType>([])
 
 
   return (
@@ -43,7 +47,19 @@ export const SortingPage: React.FC = () => {
             <Button 
               text="Новый массив"
               type="button"
+              onClick={() => setArray(randomArr())}
             />
+          </div>
+          <div className={styles.array}>
+            {
+              array.length > 0 &&
+              array.map(item => (
+                <Column 
+                  index={item.index}
+                  state={item.state}
+                />
+              ))
+            }
           </div>
         </div>
       </main>
