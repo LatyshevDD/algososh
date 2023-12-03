@@ -14,28 +14,39 @@ export const SortingPage: React.FC = () => {
 
   const [sortAlgorithm, setSortAlgorithm] = useState('Выбор')
   const [array, setArray] = useState<setArrayArgumentType>([])
+  const [ascendingButtonActive, setAscendingButtonActive] = useState(false)
+  const [descendingButtonActive, setDescendingButtonActive] = useState(false)
 
   useEffect(() => setArray(randomArr()), [])
 
-  const handleAscendingSort = () => {
+  const handleAscendingSort = async() => {
+
+    await setAscendingButtonActive(true)
+
     if(sortAlgorithm === 'Пузырек') {
-      ascendingBubleSort(array, setArray)
+      await ascendingBubleSort(array, setArray)
     }
 
     if(sortAlgorithm === 'Выбор') {
-      ascendingSelectSort(array, setArray)
-      
-  }
+      await ascendingSelectSort(array, setArray)  
+    }
+
+    setAscendingButtonActive(false)
 }
 
-  const handleDescendingSort = () => {
+  const handleDescendingSort = async() => {
+
+    await setDescendingButtonActive(true)
+
     if(sortAlgorithm === 'Пузырек') {
-      descendingBubleSort(array, setArray)
+      await descendingBubleSort(array, setArray)
     }
 
     if(sortAlgorithm === 'Выбор') {
-      descendingSelectSort(array, setArray)
+      await descendingSelectSort(array, setArray)
     }
+
+    setDescendingButtonActive(false)
   }
 
   return (
@@ -47,12 +58,14 @@ export const SortingPage: React.FC = () => {
               <RadioInput 
                 label='Выбор'
                 checked={sortAlgorithm === 'Выбор'}
-                onChange={() => setSortAlgorithm('Выбор')} 
+                onChange={() => setSortAlgorithm('Выбор')}
+                disabled={ascendingButtonActive || descendingButtonActive} 
               />
               <RadioInput 
                 label='Пузырек'
                 checked={sortAlgorithm === 'Пузырек'}
-                onChange={() => setSortAlgorithm('Пузырек')}   
+                onChange={() => setSortAlgorithm('Пузырек')}
+                disabled={ascendingButtonActive || descendingButtonActive}   
               />
             </div>
             <div className={styles.sort_buttons}>
@@ -60,19 +73,24 @@ export const SortingPage: React.FC = () => {
                 text="По возрастанию"
                 type = 'button'
                 sorting={Direction.Ascending}
-                onClick={handleAscendingSort} 
+                onClick={handleAscendingSort}
+                isLoader={ascendingButtonActive}
+                disabled={descendingButtonActive} 
               />
               <Button
                 text='По убыванию' 
                 type = 'button'
                 sorting={Direction.Descending}
-                onClick={handleDescendingSort}  
+                onClick={handleDescendingSort}
+                disabled={ascendingButtonActive}
+                isLoader={descendingButtonActive}  
               />
             </div>
             <Button 
               text="Новый массив"
               type="button"
               onClick={() => setArray(randomArr())}
+              disabled={ascendingButtonActive || descendingButtonActive}
             />
           </div>
           <div className={styles.array}>
