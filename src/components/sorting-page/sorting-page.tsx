@@ -4,7 +4,7 @@ import { RadioInput } from "../ui/radio-input/radio-input"
 import { Column } from "../ui/column/column"
 import styles from './sorting-page.module.css'
 import { SolutionLayout } from "../ui/solution-layout/solution-layout"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Direction } from "../../types/direction"
 import { randomArr } from "../../utils/utils"
 import { setArrayArgumentType } from "../../types/types"
@@ -14,6 +14,8 @@ export const SortingPage: React.FC = () => {
 
   const [sortAlgorithm, setSortAlgorithm] = useState('Выбор')
   const [array, setArray] = useState<setArrayArgumentType>([])
+
+  useEffect(() => setArray(randomArr()), [])
 
   const handleAscendingSort = () => {
     if(sortAlgorithm === 'Пузырек') {
