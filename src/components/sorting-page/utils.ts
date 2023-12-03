@@ -67,6 +67,8 @@ export async function ascendingSelectSort (array: setArrayArgumentType, setArray
       let indexMin = i
 
       for (let j = i+1; j < sortedArray.length; j++) {
+
+          // Выделяем первые сравниваемые элементы
           sortedArray[j].state = ElementStates.Changing
           sortedArray[i].state = ElementStates.Changing
           await setStateWithPause(setArray, 1000, sortedArray)
@@ -86,6 +88,7 @@ export async function ascendingSelectSort (array: setArrayArgumentType, setArray
               await setStateWithPause(setArray, 1000, sortedArray)
           }
           
+          //Если текущий элемент не минимальный
           if(j !== indexMin) {
             sortedArray[j].state = ElementStates.Default
           }
@@ -112,40 +115,40 @@ export async function descendingSelectSort (array: setArrayArgumentType, setArra
   for (let i = 0; i < sortedArray.length; i++) {
       let indexMax = i
       for (let j = i+1; j < sortedArray.length; j++) {
+
+        // Выделяем первые сравниваемые элементы
+        sortedArray[j].state = ElementStates.Changing
+        sortedArray[i].state = ElementStates.Changing
+        await setStateWithPause(setArray, 1000, sortedArray)
+
           if (sortedArray[j].index > sortedArray[indexMax].index) {
               indexMax = j
+
+              // Предыдущим максимальным элементам устанавливаем state default
+              let modifiedElement = findIndexModified(sortedArray, i)
+
+              if(modifiedElement) {
+                sortedArray[modifiedElement].state = ElementStates.Default
+              }
+
+              //Устанавливаем modified для минимального элемента
+              sortedArray[j].state = ElementStates.Modified
+              await setStateWithPause(setArray, 1000, sortedArray)
           }
+
+          if(j !== indexMax) {
+            sortedArray[j].state = ElementStates.Default
+          }
+          
+          await setStateWithPause(setArray, 1000, sortedArray)
       }
       let tmp = sortedArray[i]
       sortedArray[i] = sortedArray[indexMax]
       sortedArray[indexMax] = tmp
+      sortedArray[i].state = ElementStates.Modified
+      sortedArray[indexMax].state = ElementStates.Default
+      await setStateWithPause(setArray, 1000, sortedArray)
   }
 
   setArray([...sortedArray])
 }
-
-
-// let arrayTest = [
-//   {
-//     index: 1,
-//     state: ElementStates.Default
-//   },
-//   {
-//     index: 1,
-//     state: ElementStates.Modified
-//   },
-//   {
-//     index: 1,
-//     state: ElementStates.Default
-//   },
-//   {
-//     index: 1,
-//     state: ElementStates.Default
-//   },
-//   {
-//     index: 1,
-//     state: ElementStates.Default
-//   }
-// ]
-
-// console.log(findIndexModified(arrayTest, 1))
