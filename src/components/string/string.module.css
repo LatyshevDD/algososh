@@ -10,7 +10,7 @@
   width: 45vw;
 }
 
-.circle {
+.circles {
   display: flex;
   gap: 16px;
   list-style-type: none;

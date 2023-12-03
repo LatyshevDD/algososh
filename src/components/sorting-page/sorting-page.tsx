@@ -8,12 +8,24 @@ import { useState } from "react"
 import { Direction } from "../../types/direction"
 import { randomArr } from "../../utils/utils"
 import { setArrayArgumentType } from "../../types/types"
+import { ascendingBubleSort, descendingBubleSort } from "./utils"
 
 export const SortingPage: React.FC = () => {
 
   const [sortAlgorithm, setSortAlgorithm] = useState('Выбор')
   const [array, setArray] = useState<setArrayArgumentType>([])
 
+  const handleAscendingSort = () => {
+    if(sortAlgorithm === 'Пузырек') {
+      ascendingBubleSort(array, setArray)
+    }
+  }
+
+  const handleDescendingSort = () => {
+    if(sortAlgorithm === 'Пузырек') {
+      descendingBubleSort(array, setArray)
+    }
+  }
 
   return (
     <SolutionLayout title="Сортировка массива">
@@ -36,12 +48,14 @@ export const SortingPage: React.FC = () => {
               <Button
                 text="По возрастанию"
                 type = 'button'
-                sorting={Direction.Ascending} 
+                sorting={Direction.Ascending}
+                onClick={handleAscendingSort} 
               />
               <Button
                 text='По убыванию' 
                 type = 'button'
-                sorting={Direction.Descending}  
+                sorting={Direction.Descending}
+                onClick={handleDescendingSort}  
               />
             </div>
             <Button 
@@ -53,12 +67,13 @@ export const SortingPage: React.FC = () => {
           <div className={styles.array}>
             {
               array.length > 0 &&
-              array.map(item => (
-                <Column 
+              array.map((item, index) => {
+                return (<Column 
                   index={item.index}
                   state={item.state}
-                />
-              ))
+                  key={index}
+                />)
+              })
             }
           </div>
         </div>
