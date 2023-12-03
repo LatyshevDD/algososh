@@ -8,7 +8,7 @@ import { useState } from "react"
 import { Direction } from "../../types/direction"
 import { randomArr } from "../../utils/utils"
 import { setArrayArgumentType } from "../../types/types"
-import { ascendingBubleSort, descendingBubleSort } from "./utils"
+import { ascendingBubleSort, descendingBubleSort, ascendingSelectSort, descendingSelectSort } from "./utils"
 
 export const SortingPage: React.FC = () => {
 
@@ -19,11 +19,19 @@ export const SortingPage: React.FC = () => {
     if(sortAlgorithm === 'Пузырек') {
       ascendingBubleSort(array, setArray)
     }
+
+    if(sortAlgorithm === 'Выбор') {
+      ascendingSelectSort(array, setArray)
+    }
   }
 
   const handleDescendingSort = () => {
     if(sortAlgorithm === 'Пузырек') {
       descendingBubleSort(array, setArray)
+    }
+
+    if(sortAlgorithm === 'Выбор') {
+      descendingSelectSort(array, setArray)
     }
   }
 

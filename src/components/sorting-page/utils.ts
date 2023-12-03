@@ -1,6 +1,5 @@
 import { setStateWithPause } from "../../utils/utils"
 import { setArrayArgumentType } from "../../types/types"
-import { ElementStates } from "../../types/element-states"
 
 // Пузырьковая сортировка по возрастанию
 export async function ascendingBubleSort (array: setArrayArgumentType, setArray: React.Dispatch<React.SetStateAction<setArrayArgumentType>>) {
@@ -33,6 +32,47 @@ export async function descendingBubleSort (array: setArrayArgumentType, setArray
             sortedArray[j+1].index = tmp
         }
     }
+  }
+
+  setArray([...sortedArray])
+}
+
+//Сортировка выбором по возрастанию
+
+export async function ascendingSelectSort (array: setArrayArgumentType, setArray: React.Dispatch<React.SetStateAction<setArrayArgumentType>>) {
+  
+  let sortedArray = array
+  
+  for (let i = 0; i < sortedArray.length; i++) {
+      let indexMin = i
+      for (let j = i+1; j < sortedArray.length; j++) {
+          if (sortedArray[j].index < sortedArray[indexMin].index) {
+              indexMin = j
+          }
+      }
+      let tmp = sortedArray[i]
+      sortedArray[i] = sortedArray[indexMin]
+      sortedArray[indexMin] = tmp
+  }
+
+  setArray([...sortedArray])
+}
+
+//Сортировка выбором по возрастанию
+export async function descendingSelectSort (array: setArrayArgumentType, setArray: React.Dispatch<React.SetStateAction<setArrayArgumentType>>) {
+  
+  let sortedArray = array
+  
+  for (let i = 0; i < sortedArray.length; i++) {
+      let indexMax = i
+      for (let j = i+1; j < sortedArray.length; j++) {
+          if (sortedArray[j].index > sortedArray[indexMax].index) {
+              indexMax = j
+          }
+      }
+      let tmp = sortedArray[i]
+      sortedArray[i] = sortedArray[indexMax]
+      sortedArray[indexMax] = tmp
   }
 
   setArray([...sortedArray])
