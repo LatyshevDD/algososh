@@ -47,3 +47,17 @@ export const randomArr = () => {
   
   return result
 }
+
+//Функция поиска индекса элемента в массиве со state=modified
+
+export const findIndexModified = (array: SortingObjectType[], currentIndex: number) => {
+  let indexOfEl
+  const element = array.find((item, index) => {
+    if (item.state === ElementStates.Modified && index > currentIndex) {
+      indexOfEl = index
+      return item
+    }
+  })
+
+  return indexOfEl
+}

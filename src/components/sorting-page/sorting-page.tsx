@@ -24,8 +24,9 @@ export const SortingPage: React.FC = () => {
 
     if(sortAlgorithm === 'Выбор') {
       ascendingSelectSort(array, setArray)
-    }
+      
   }
+}
 
   const handleDescendingSort = () => {
     if(sortAlgorithm === 'Пузырек') {
