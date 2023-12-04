@@ -23,3 +23,11 @@ export type SortingObjectType = {
 }
 
 export type setArrayArgumentType = SortingObjectType[]
+
+//stack
+export type StackObjectType = {
+  value: string,
+  state?: string,
+  head?: string | null,
+  index?: number
+}
