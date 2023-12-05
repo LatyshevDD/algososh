@@ -27,7 +27,10 @@ export type setArrayArgumentType = SortingObjectType[]
 //stack
 export type StackObjectType = {
   value: string,
-  state?: string,
+  state?: ElementStates | undefined,
   head?: string | null,
   index?: number
 }
+
+export type setStackArgumentType = StackObjectType[]
+

@@ -6,7 +6,7 @@ import { Button } from "../ui/button/button"
 import { Circle } from "../ui/circle/circle"
 import { ElementStates } from "../../types/element-states"
 import { StackObjectType } from "../../types/types"
-import { pause } from "../../utils/utils"
+import { push } from "./utils"
 
 
 export const StackPage: React.FC = () => {
@@ -15,23 +15,23 @@ export const StackPage: React.FC = () => {
   const[isLoader, setIsLoader] = useState(false)
   const[stack, setStack] = useState<StackObjectType[]>([])
 
-  const push = async(item: string) => {
-    let newStack = stack
+  // const push = async(item: string) => {
+  //   let newStack = stack
   
-    if(newStack.length > 0) {
-      newStack = newStack.map((item, index) => {
-        return {...item, head: null}
-      })
-      await setStack(newStack)
-    }
-    setStack([...newStack, {value: item, state: ElementStates.Default, head: 'top', index: stack.length}])
-  }
+  //   if(newStack.length > 0) {
+  //     newStack = newStack.map((item, index) => {
+  //       return {...item, head: null}
+  //     })
+  //     await setStack(newStack)
+  //   }
+  //   setStack([...newStack, {value: item, state: ElementStates.Default, head: 'top', index: stack.length}])
+  // }
 
-  console.log(stack)
+  // console.log(stack)
 
   const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    push(string)
+    push(string, stack, setStack)
     setString('')
   }
 
@@ -76,7 +76,8 @@ export const StackPage: React.FC = () => {
                     letter={item.value} 
                     key={index}
                     head={item.head}
-                    index={item.index} 
+                    index={item.index}
+                    state={item.state} 
                   />)
               })
             }
