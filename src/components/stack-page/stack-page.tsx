@@ -4,9 +4,8 @@ import styles from './stack-page.module.css'
 import { Input } from "../ui/input/input"
 import { Button } from "../ui/button/button"
 import { Circle } from "../ui/circle/circle"
-import { ElementStates } from "../../types/element-states"
 import { StackObjectType } from "../../types/types"
-import { push } from "./utils"
+import { push, pop } from "./utils"
 
 
 export const StackPage: React.FC = () => {
@@ -15,24 +14,18 @@ export const StackPage: React.FC = () => {
   const[isLoader, setIsLoader] = useState(false)
   const[stack, setStack] = useState<StackObjectType[]>([])
 
-  // const push = async(item: string) => {
-  //   let newStack = stack
-  
-  //   if(newStack.length > 0) {
-  //     newStack = newStack.map((item, index) => {
-  //       return {...item, head: null}
-  //     })
-  //     await setStack(newStack)
-  //   }
-  //   setStack([...newStack, {value: item, state: ElementStates.Default, head: 'top', index: stack.length}])
-  // }
-
-  // console.log(stack)
-
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
+    await setIsLoader(true)
     e.preventDefault()
-    push(string, stack, setStack)
+    await push(string, stack, setStack)
     setString('')
+    setIsLoader(false)
+  }
+
+  const handleDeleteButton = async() => {
+    await setIsLoader(true)
+    await pop(stack, setStack)
+    setIsLoader(false)
   }
 
   return (
@@ -60,11 +53,15 @@ export const StackPage: React.FC = () => {
             <Button 
               type='button' 
               text='Удалить'
+              onClick={handleDeleteButton}
+              disabled={isLoader}
             />
           </form>
             <Button 
               type='button' 
               text='Очистить'
+              onClick={() => setStack([])}
+              disabled={isLoader}
             />
         </div>
         <ul className={styles.circles}>
