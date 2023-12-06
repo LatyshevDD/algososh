@@ -13,7 +13,9 @@ let queue = new Queue<string>()
 export const QueuePage: React.FC = () => {
 
   const[string, setString] = useState('')
-  const[isLoader, setIsLoader] = useState(false)
+  const[addLoader, setAddLoader] = useState(false)
+  const[deleateLoader, setDeleteLoader] = useState(false)
+  const[clearLoader, setClearLoader] = useState(false)
   const[queueElements, setQueueElements] = useState(queue.getElements())
   const[tail, setTail] = useState(-1)
   const[head, setHead] = useState(-1)
@@ -22,7 +24,7 @@ export const QueuePage: React.FC = () => {
 
 
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
-    setIsLoader(true)
+    setAddLoader(true)
     e.preventDefault()
     queue.enqueue(string)
     setTail(queue.getTail())
@@ -32,11 +34,11 @@ export const QueuePage: React.FC = () => {
     setAddState(-1)
     setQueueElements(queue.getElements())
     setString('')
-    setIsLoader(false)
+    setAddLoader(false)
   }
 
   const handleDeleteButton = async() => {
-    setIsLoader(true)
+    setDeleteLoader(true)
     setDeleteState(queue.getHead())
     await pause(500)
     setDeleteState(-1)
@@ -44,14 +46,16 @@ export const QueuePage: React.FC = () => {
     setHead(queue.getHead())
     setTail(queue.getTail())
     setQueueElements(queue.getElements())
-    setIsLoader(false)
+    setDeleteLoader(false)
   }
 
   const handleClearButton = () => {
+    setClearLoader(true)
     queue.clear()
     setTail(queue.getTail())
     setHead(queue.getHead())
     setQueueElements(queue.getElements())
+    setClearLoader(false)
   }
 
 
@@ -71,24 +75,28 @@ export const QueuePage: React.FC = () => {
               isLimitText = {true}
               extraClass={styles.input}
               onChange = {(e) => setString(e.currentTarget.value)}
+              disabled={addLoader || deleateLoader || clearLoader}
             />
             <Button 
               type='submit' 
               text='Добавить'
-              isLoader={isLoader}
+              isLoader={addLoader}
+              disabled={deleateLoader || clearLoader}
             />
             <Button 
               type='button' 
               text='Удалить'
               onClick={handleDeleteButton}
-              disabled={isLoader}
+              isLoader={deleateLoader}
+              disabled={addLoader || clearLoader}
             />
           </form>
             <Button 
               type='button' 
               text='Очистить'
               onClick={handleClearButton}
-              disabled={isLoader}
+              isLoader={clearLoader}
+              disabled={addLoader || deleateLoader}
             />
         </div>
         <ul className={styles.circles}>
