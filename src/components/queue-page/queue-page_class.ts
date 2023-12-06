@@ -5,7 +5,6 @@ interface QueueClassType<T> {
   getTail: () => number;
   clear: () => void;
   isEmpty: () => boolean;
-  // getSize: () => number;
   getElements: () => Array<T | undefined>;
 }
 
@@ -66,10 +65,6 @@ export class Queue<T> implements QueueClassType<T> {
     this.length = 0
     this.elements = new Array(this.size)
   }
-
-  // getSize = () => {
-  //   return this.size
-  // }
 
   getElements = () => {
     return [...this.elements]
