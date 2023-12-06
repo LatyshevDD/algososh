@@ -18,6 +18,8 @@ export const QueuePage: React.FC = () => {
   const[tail, setTail] = useState(-1)
   const[head, setHead] = useState(-1)
   const[addState, setAddState] = useState(-1)
+  const[deleteState, setDeleteState] = useState(-1)
+
 
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
     setIsLoader(true)
@@ -35,6 +37,9 @@ export const QueuePage: React.FC = () => {
 
   const handleDeleteButton = async() => {
     setIsLoader(true)
+    setDeleteState(queue.getHead())
+    await pause(500)
+    setDeleteState(-1)
     queue.dequeue()
     setHead(queue.getHead())
     setTail(queue.getTail())
@@ -95,7 +100,7 @@ export const QueuePage: React.FC = () => {
                     key={index}
                     head={index === head ? 'head' : null}
                     index={index}
-                    state={index === addState ? ElementStates.Changing : ElementStates.Default}
+                    state={(index === addState || index === deleteState) ? ElementStates.Changing : ElementStates.Default}
                     tail={index === tail ? 'tail' : null} 
                   />)
               })
