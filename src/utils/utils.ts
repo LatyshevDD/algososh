@@ -4,7 +4,6 @@ import {
   setArrayArgumentType,
   SortingObjectType,
   setStackArgumentType,
-  // setQueueArgumentType
 } from "../types/types"
 
 import { ElementStates } from "../types/element-states"

@@ -15,24 +15,38 @@ export const QueuePage: React.FC = () => {
   const[string, setString] = useState('')
   const[isLoader, setIsLoader] = useState(false)
   const[queueElements, setQueueElements] = useState(queue.getElements())
-  const[tail, setTail] = useState(0)
+  const[tail, setTail] = useState(-1)
+  const[head, setHead] = useState(-1)
+  const[addState, setAddState] = useState(-1)
 
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
-    await setIsLoader(true)
+    setIsLoader(true)
     e.preventDefault()
     queue.enqueue(string)
     setTail(queue.getTail())
+    setHead(queue.getHead())
+    setAddState(queue.getTail())
     await pause(500)
-    setTail(0)
+    setAddState(-1)
     setQueueElements(queue.getElements())
     setString('')
     setIsLoader(false)
   }
 
   const handleDeleteButton = async() => {
-    await setIsLoader(true)
-
+    setIsLoader(true)
+    queue.dequeue()
+    setHead(queue.getHead())
+    setTail(queue.getTail())
+    setQueueElements(queue.getElements())
     setIsLoader(false)
+  }
+
+  const handleClearButton = () => {
+    queue.clear()
+    setTail(queue.getTail())
+    setHead(queue.getHead())
+    setQueueElements(queue.getElements())
   }
 
 
@@ -68,7 +82,7 @@ export const QueuePage: React.FC = () => {
             <Button 
               type='button' 
               text='Очистить'
-              // onClick={() => setQueue([])}
+              onClick={handleClearButton}
               disabled={isLoader}
             />
         </div>
@@ -77,12 +91,12 @@ export const QueuePage: React.FC = () => {
               queueElements.map((item, index) => {
                 return (
                   <Circle 
-                    letter={item ? item : ''} 
+                    letter={item ? item: ''} 
                     key={index}
-                    // head={item.head}
+                    head={index === head ? 'head' : null}
                     index={index}
-                    state={index === tail - 1 && tail ? ElementStates.Changing : ElementStates.Default}
-                    tail={index === tail - 1 && tail ? 'tail' : null} 
+                    state={index === addState ? ElementStates.Changing : ElementStates.Default}
+                    tail={index === tail ? 'tail' : null} 
                   />)
               })
             }
