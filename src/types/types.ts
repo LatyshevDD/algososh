@@ -34,3 +34,15 @@ export type StackObjectType = {
 
 export type setStackArgumentType = StackObjectType[]
 
+//queue
+// export type QueueObjectType = {
+//   value: string,
+//   state?: ElementStates | undefined,
+//   index?: number,
+//   head?: string,
+//   tail?: string,
+// }
+
+// export type setQueueArgumentType = QueueObjectType[]
+
+
