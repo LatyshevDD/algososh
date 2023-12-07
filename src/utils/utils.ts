@@ -3,7 +3,6 @@ import {
   setNumArrayArgumentType,
   setArrayArgumentType,
   SortingObjectType,
-  setStackArgumentType,
 } from "../types/types"
 
 import { ElementStates } from "../types/element-states"
@@ -15,7 +14,7 @@ export const pause = async (ms: number) => {
 export const setStateWithPause = async (
   setState: React.Dispatch<React.SetStateAction<any>>,
   delay: number,
-  argument: setStrArrayArgumentType | setNumArrayArgumentType | setArrayArgumentType | setStackArgumentType
+  argument: setStrArrayArgumentType | setNumArrayArgumentType | setArrayArgumentType
 ) => {
   await pause(delay)
   setState([...argument])
