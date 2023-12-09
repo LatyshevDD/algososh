@@ -24,7 +24,8 @@ export const getRandomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export const randomArr = () => {
+// Функция генерации случайного массива для страницы сортировки
+export const getRandomArr = () => {
 
   //Определяем количество элементов массива
   const elementsTotal = getRandomInt(3, 17)
@@ -60,4 +61,21 @@ export const findIndexModified = (array: SortingObjectType[], currentIndex: numb
   })
 
   return indexOfEl
+}
+
+
+// Функция генерации случайного массива
+export const getRandomStringArr = (min: number, max: number) => {
+
+  //Определяем количество элементов массива
+  const elementsTotal = getRandomInt(min, max)
+  
+  let randomArray: string[] = []
+
+  //Добавляем в массив случайные элементы
+  for(let i = 0; i <= elementsTotal; i++) {
+    randomArray.push(getRandomInt(0, 100).toString())
+  }
+  
+  return randomArray
 }

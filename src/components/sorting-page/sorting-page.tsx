@@ -6,7 +6,7 @@ import styles from './sorting-page.module.css'
 import { SolutionLayout } from "../ui/solution-layout/solution-layout"
 import { useState, useEffect } from "react"
 import { Direction } from "../../types/direction"
-import { randomArr } from "../../utils/utils"
+import { getRandomArr } from "../../utils/utils"
 import { setArrayArgumentType } from "../../types/types"
 import { ascendingBubleSort, descendingBubleSort, ascendingSelectSort, descendingSelectSort } from "./utils"
 
@@ -17,7 +17,7 @@ export const SortingPage: React.FC = () => {
   const [ascendingButtonActive, setAscendingButtonActive] = useState(false)
   const [descendingButtonActive, setDescendingButtonActive] = useState(false)
 
-  useEffect(() => setArray(randomArr()), [])
+  useEffect(() => setArray(getRandomArr()), [])
 
   const handleAscendingSort = async() => {
 
@@ -89,7 +89,7 @@ export const SortingPage: React.FC = () => {
             <Button 
               text="Новый массив"
               type="button"
-              onClick={() => setArray(randomArr())}
+              onClick={() => setArray(getRandomArr())}
               disabled={ascendingButtonActive || descendingButtonActive}
             />
           </div>
