@@ -73,14 +73,54 @@ export class LinkedList<T> implements LinkedListType<T> {
   }
 
   prepend(element: T) {
-    
+    const node = new LinkedListNode(element);
+
+    if (this.head === null) {
+      this.head = node;
+    } else {
+      node.next = this.head
+      this.head = node
+    }
+    this.size++;
   }
 
   deleteHead = () => {
-
+    if (this.head === null) {
+      return
+    } 
+    if (this.head.next) {
+      let current = this.head.next
+      this.head.next = null
+      this.head = current
+      this.size--
+      return
+    }
+    this.head = null
+    this.size--
   }
-  deleteTail = () => {
 
+  deleteTail = () => {
+    if (this.head === null) {
+      return
+    } 
+    if(this.getSize() === 1) {
+      this.deleteHead()
+      this.size--
+      return
+    }
+    if(this.getSize() === 2) {
+      this.head.next = null
+      this.size--
+      return
+    }
+    let count = this.getSize() - 2
+    let current = this.head
+    while (current.next && count > 0) {
+      current = current.next
+      count--
+    }
+    current.next = null
+    this.size--
   }
 
   toArray = () => {

@@ -29,7 +29,31 @@ export const ListPage: React.FC = () => {
   )
 
   const handleAddTail = () => {
+    if(string.length === 0) {
+      return
+    }
     linkedList.append(string)
+    setArray(linkedList.toArray())
+    setString('')
+  }
+
+  const handleAddHead = () => {
+    if(string.length === 0) {
+      return
+    }
+    linkedList.prepend(string)
+    setArray(linkedList.toArray())
+    setString('')
+  }
+
+  const handleDeleteHead = () => {
+    linkedList.deleteHead()
+    setArray(linkedList.toArray())
+  }
+
+  const handleDeleteTail = () => {
+    linkedList.deleteTail()
+    console.log({size: linkedList.getSize()})
     setArray(linkedList.toArray())
   }
 
@@ -50,6 +74,7 @@ export const ListPage: React.FC = () => {
             <Button 
               type='button' 
               text='Добавить в head'
+              onClick={handleAddHead}
             />
             <Button 
               type='button' 
@@ -59,10 +84,12 @@ export const ListPage: React.FC = () => {
             <Button 
               type='button' 
               text='Удалить из head'
+              onClick={handleDeleteHead}
             />
             <Button 
               type='button' 
               text='Удалить из tail'
+              onClick={handleDeleteTail}
             />
           </div>
           <div className={styles.input_container}>
