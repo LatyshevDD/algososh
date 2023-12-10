@@ -1,3 +1,4 @@
+
 export class LinkedListNode<T> {
   value: T
   next: LinkedListNode<T> | null
@@ -28,31 +29,68 @@ export class LinkedList<T> implements LinkedListType<T> {
 
   addByIndex(element: T, index: number) {
     if (index < 0 || index > this.size) {
-      console.log('Enter a valid index');
-      return;
+      throw new Error('Enter a valid index')
     } else {
-      const node = new LinkedListNode(element);
-
-      // добавить элемент в начало списка
+      const node = new LinkedListNode(element)
       if (index === 0) {
-        // ваш код ...
+        if(this.head === null) {
+          this.head = node
+        } else {
+          let current = this.head
+          this.head = node
+          this.head.next = current
+        }
       } else {
-        let curr = this.head;
-        let currIndex = 0;
-
-        // перебрать элементы в списке до нужной позиции
-        // ваш код ...
-
-        // добавить элемент
-        // ваш код ...
+        if(this.head) {
+          let current = this.head
+          let currIndex = 0
+          while(currIndex !== index - 1 && current.next) {
+            current = current.next
+            currIndex++
+          }
+          node.next = current.next
+          current.next = node
+        }
       }
-
-      this.size++;
+      this.size++
     }
   }
 
   deleteByIndex(index: number) {
-    
+    if (index < 0 || index > this.size) {
+      throw new Error('Enter a valid index')
+    } else {
+      if(index === 0) {
+        if(this.head === null) {
+          return
+        } else {
+          this.deleteHead()
+        }
+      } else {
+        if(index === this.size - 1) {
+          this.deleteTail()
+        } else {
+          if(this.head) {
+            //вычисляем элемент, который находится перед удаляемым
+            let trav1 = this.head
+            let currIndex = 0
+            while(currIndex !== index - 1 && trav1.next) {
+              trav1 = trav1.next
+              currIndex++
+            }
+            //вычисляем элемент, который находится после удаляемого
+            let trav2 = this.head
+            currIndex = 0
+            while(currIndex !== index + 1 && trav2.next) {
+              trav2 = trav2.next
+              currIndex++
+            }
+            trav1.next = trav2
+          }
+        }
+      }
+      this.size--
+    }  
   }
 
   append(element: T) {

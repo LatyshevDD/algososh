@@ -13,7 +13,7 @@ import { LinkedList } from "./list-page_class";
 export const ListPage: React.FC = () => {
 
   const[string, setString] = useState('')
-  const[index, setIndex] = useState<number | undefined>()
+  const[index, setIndex] = useState<number>(-1)
   const[array, setArray] = useState<string[]>([])
 
   const linkedList = new LinkedList(array)
@@ -53,8 +53,20 @@ export const ListPage: React.FC = () => {
 
   const handleDeleteTail = () => {
     linkedList.deleteTail()
-    console.log({size: linkedList.getSize()})
     setArray(linkedList.toArray())
+  }
+
+  const handleAddByIndex = () => {
+    linkedList.addByIndex(string, index)
+    setArray(linkedList.toArray())
+    setString('')
+    setIndex(-1)
+  }
+
+  const handleDeleteByIndex = () => {
+    linkedList.deleteByIndex(index)
+    setArray(linkedList.toArray())
+    setIndex(-1)
   }
 
   return (
@@ -94,7 +106,7 @@ export const ListPage: React.FC = () => {
           </div>
           <div className={styles.input_container}>
             <Input 
-              value={index}
+              value={index >= 0 ? index : ''}
               placeholder = "Введите индекс"
               type = "number"
               maxLength = {1}
@@ -105,11 +117,13 @@ export const ListPage: React.FC = () => {
               type='button' 
               text='Добавить по индексу'
               extraClass={styles.flex_grow}
+              onClick={handleAddByIndex}
             />
             <Button 
               type='button' 
               text='Удалить по индексу'
               extraClass={styles.flex_grow}
+              onClick={handleDeleteByIndex}
             />
           </div>
           <div className={styles.circles}>
