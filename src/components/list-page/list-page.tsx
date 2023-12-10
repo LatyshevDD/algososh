@@ -8,13 +8,16 @@ import { Circle } from "../ui/circle/circle";
 import { ArrowIcon } from "../ui/icons/arrow-icon";
 import { getRandomStringArr } from "../../utils/utils";
 import { LinkedList } from "./list-page_class";
-
+import { pause } from "../../utils/utils";
+import { ElementStates } from "../../types/element-states";
 
 export const ListPage: React.FC = () => {
 
   const[string, setString] = useState('')
   const[index, setIndex] = useState<number>(-1)
   const[array, setArray] = useState<string[]>([])
+  const[headNode, setHeadNode] = useState(-1)
+  const[modifiedState, setModifiedState] = useState(-1)
 
   const linkedList = new LinkedList(array)
 
@@ -28,22 +31,34 @@ export const ListPage: React.FC = () => {
     []
   )
 
-  const handleAddTail = () => {
+  const handleAddTail = async() => {
     if(string.length === 0) {
       return
     }
+    setHeadNode(linkedList.getSize() - 1)
+    await pause(500)
+    setString('')
+    setHeadNode(-1)
     linkedList.append(string)
     setArray(linkedList.toArray())
-    setString('')
+    setModifiedState(linkedList.getSize() - 1)
+    await pause(500)
+    setModifiedState(-1)
   }
 
-  const handleAddHead = () => {
+  const handleAddHead = async() => {
     if(string.length === 0) {
       return
     }
+    setHeadNode(0)
+    await pause(500)
+    setString('')
+    setHeadNode(-1)
     linkedList.prepend(string)
     setArray(linkedList.toArray())
-    setString('')
+    setModifiedState(0)
+    await pause(500)
+    setModifiedState(-1)
   }
 
   const handleDeleteHead = () => {
@@ -57,6 +72,9 @@ export const ListPage: React.FC = () => {
   }
 
   const handleAddByIndex = () => {
+    if(string.length === 0 || index < 0) {
+      return
+    }
     linkedList.addByIndex(string, index)
     setArray(linkedList.toArray())
     setString('')
@@ -135,7 +153,14 @@ export const ListPage: React.FC = () => {
                       letter={item}
                       key={index}
                       index={index}
-                      head={index === 0 ? 'head' : undefined}
+                      head={
+                        index === headNode ? <Circle letter = {string} isSmall={true} state={ElementStates.Changing}/> : undefined
+                        || index === 0 ? 'head' : undefined
+                      }
+                      state={
+                        (index === modifiedState && ElementStates.Modified)
+                        || ElementStates.Default
+                      }
                       tail={index === array.length - 1 ? 'tail' : undefined}
                     />
                   )
@@ -145,7 +170,14 @@ export const ListPage: React.FC = () => {
                     <Circle 
                       letter={item}
                       index={index}
-                      head={index === 0 ? 'head' : undefined}
+                      head={
+                        index === headNode ? <Circle letter = {string} isSmall={true} state={ElementStates.Changing}/> : undefined
+                        || index === 0 ? 'head' : undefined
+                      }
+                      state={
+                        (index === modifiedState && ElementStates.Modified)
+                        || ElementStates.Default
+                      }
                       tail={index === array.length - 1 ? 'tail' : undefined}
                     />
                     <ArrowIcon />
