@@ -60,12 +60,18 @@ export const ListPage: React.FC = () => {
     setModifiedState(-1)
   }
 
-  const handleDeleteHead = () => {
+  const handleDeleteHead = async() => {
+    setTailNode(0)
+    await pause(500)
+    setTailNode(-1)
     linkedList.deleteHead()
     setArray(linkedList.toArray())
   }
 
-  const handleDeleteTail = () => {
+  const handleDeleteTail = async() => {
+    setTailNode(linkedList.getSize() - 1)
+    await pause(500)
+    setTailNode(-1)
     linkedList.deleteTail()
     setArray(linkedList.toArray())
   }
@@ -178,7 +184,7 @@ export const ListPage: React.FC = () => {
                       key={index}
                       index={index}
                       head={
-                        index === headNode ? <Circle letter = {string} isSmall={true} state={ElementStates.Changing}/> : undefined
+                        index === headNode ? <Circle letter = {string ? string : item} isSmall={true} state={ElementStates.Changing}/> : undefined
                         || index === 0 ? 'head' : undefined
                       }
                       state={
@@ -199,7 +205,7 @@ export const ListPage: React.FC = () => {
                       letter={index === tailNode ? '' : item}
                       index={index}
                       head={
-                        index === headNode ? <Circle letter = {string} isSmall={true} state={ElementStates.Changing}/> : undefined
+                        index === headNode ? <Circle letter = {string ? string : item} isSmall={true} state={ElementStates.Changing}/> : undefined
                         || index === 0 ? 'head' : undefined
                       }
                       state={
