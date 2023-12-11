@@ -28,6 +28,7 @@ export async function ascendingBubleSort (array: setArrayArgumentType, setArray:
     }
   }
 
+  sortedArray.forEach(item => item.state = ElementStates.Default)
   setArray([...sortedArray])
 }
 
@@ -55,6 +56,7 @@ export async function descendingBubleSort (array: setArrayArgumentType, setArray
     }
   }
 
+  sortedArray.forEach(item => item.state = ElementStates.Default)
   setArray([...sortedArray])
 }
 
@@ -104,6 +106,7 @@ export async function ascendingSelectSort (array: setArrayArgumentType, setArray
       await setStateWithPause(setArray, 1000, sortedArray)
   }
 
+  sortedArray.forEach(item => item.state = ElementStates.Default)
   setArray([...sortedArray])
 }
 
@@ -150,5 +153,6 @@ export async function descendingSelectSort (array: setArrayArgumentType, setArra
       await setStateWithPause(setArray, 1000, sortedArray)
   }
 
+  sortedArray.forEach(item => item.state = ElementStates.Default)
   setArray([...sortedArray])
 }
