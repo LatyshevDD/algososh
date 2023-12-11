@@ -18,12 +18,11 @@ export const ListPage: React.FC = () => {
   const[array, setArray] = useState<string[]>([])
   const[headNode, setHeadNode] = useState(-1)
   const[modifiedState, setModifiedState] = useState(-1)
+  const[changingState, setChangingState] = useState(-1)
+  const[tailNode, setTailNode] = useState(-1)
 
   const linkedList = new LinkedList(array)
 
-  // Для проверки
-  console.log(linkedList.toArray())
-  
   useEffect(
     () => {
       setArray(getRandomStringArr(3, 3))
@@ -71,17 +70,42 @@ export const ListPage: React.FC = () => {
     setArray(linkedList.toArray())
   }
 
-  const handleAddByIndex = () => {
+  const handleAddByIndex = async() => {
     if(string.length === 0 || index < 0) {
       return
     }
+    let currentIndex = -1
+    while(currentIndex <= index) {
+      setHeadNode(currentIndex)
+      setChangingState(currentIndex)
+      await pause(500)
+      currentIndex++
+    }
+    setHeadNode(-1)
+    setChangingState(-1)
     linkedList.addByIndex(string, index)
     setArray(linkedList.toArray())
+    setModifiedState(index)
+    await pause(500)
+    setModifiedState(-1)
     setString('')
     setIndex(-1)
   }
 
-  const handleDeleteByIndex = () => {
+  const handleDeleteByIndex = async() => {
+    if(index < 0) {
+      return
+    }
+    let currentIndex = -1
+    while(currentIndex <= index) {
+      setChangingState(currentIndex)
+      await pause(500)
+      currentIndex++
+    }
+    setChangingState(-1)
+    setTailNode(index)
+    await pause(500)
+    setTailNode(-1)
     linkedList.deleteByIndex(index)
     setArray(linkedList.toArray())
     setIndex(-1)
@@ -150,7 +174,7 @@ export const ListPage: React.FC = () => {
                 if(index === array.length - 1) {
                   return (
                     <Circle 
-                      letter={item}
+                      letter={index === tailNode ? '' : item}
                       key={index}
                       index={index}
                       head={
@@ -159,16 +183,20 @@ export const ListPage: React.FC = () => {
                       }
                       state={
                         (index === modifiedState && ElementStates.Modified)
+                        || ((changingState >= 0 && index <= changingState) && ElementStates.Changing)
                         || ElementStates.Default
                       }
-                      tail={index === array.length - 1 ? 'tail' : undefined}
+                      tail={
+                        index === tailNode ? <Circle letter = {item} isSmall={true} state={ElementStates.Changing}/> : undefined
+                        || index === array.length - 1 ? 'tail' : undefined
+                      }
                     />
                   )
                 }
                 return (
                   <div className={styles.circle} key={index}>
                     <Circle 
-                      letter={item}
+                      letter={index === tailNode ? '' : item}
                       index={index}
                       head={
                         index === headNode ? <Circle letter = {string} isSmall={true} state={ElementStates.Changing}/> : undefined
@@ -176,9 +204,13 @@ export const ListPage: React.FC = () => {
                       }
                       state={
                         (index === modifiedState && ElementStates.Modified)
+                        || ((changingState >= 0 && index <= changingState) && ElementStates.Changing)
                         || ElementStates.Default
                       }
-                      tail={index === array.length - 1 ? 'tail' : undefined}
+                      tail={
+                        index === tailNode ? <Circle letter = {item} isSmall={true} state={ElementStates.Changing}/> : undefined
+                        || index === array.length - 1 ? 'tail' : undefined
+                      }
                     />
                     <ArrowIcon />
                   </div>
