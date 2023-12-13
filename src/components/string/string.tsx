@@ -16,7 +16,7 @@ export const StringComponent: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    await setIsLoader(true)
+    setIsLoader(true)
     await revertString(str, setStrArray)
     setIsLoader(false)
   }
