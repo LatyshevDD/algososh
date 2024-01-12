@@ -25,7 +25,8 @@ export const StringComponent: React.FC = () => {
     <SolutionLayout title="Строка">
       <main className={styles.main}>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <Input 
+          <Input
+            value={str} 
             placeholder = "Введите текст"
             type = "text"
             maxLength = {11}
@@ -36,6 +37,7 @@ export const StringComponent: React.FC = () => {
             type='submit' 
             text='Развернуть'
             isLoader={isLoader}
+            disabled={str.length ? false : true}
           />
         </form>
         <ul className={styles.circles}>

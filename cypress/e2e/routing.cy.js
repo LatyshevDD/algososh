@@ -1,4 +1,4 @@
-describe('routing spec', () => {
+describe('routing test', () => {
   
   beforeEach(() => {
     cy.visit('http://localhost:3000');
