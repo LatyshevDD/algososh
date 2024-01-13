@@ -21,8 +21,8 @@ export const StackPage: React.FC = () => {
   const[clearLoader, setClearLoader] = useState(false)
 
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>) => {
-    await setAddLoader(true)
     e.preventDefault()
+    await setAddLoader(true)
     stack.push(string)
     setTop(stack.getTop())
     setChangingState(stack.getTop())
@@ -75,7 +75,7 @@ export const StackPage: React.FC = () => {
               type='submit' 
               text='Добавить'
               isLoader={addLoader}
-              disabled={deleateLoader || clearLoader}
+              disabled={deleateLoader || clearLoader || !string.length}
             />
             <Button 
               type='button' 
