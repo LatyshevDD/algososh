@@ -37,6 +37,7 @@ export const FibonacciPage: React.FC = () => {
             type='submit' 
             text='Рассчитать'
             isLoader={isLoader}
+            disabled={num.length ? false : true}
           />
         </form>
         <ul className={styles.circles}>
