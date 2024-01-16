@@ -5,7 +5,7 @@ describe('queue test', () => {
   // modified: 4px solid rgb(127, 224, 81);
 
   it('checking button disabled', () => {
-    cy.visit('http://localhost:3000/queue')
+    cy.visit('queue')
     cy.get('button').eq(1).as('addButton')
     cy.get('input').should('have.value', '')
     cy.get('@addButton').should('be.disabled')
@@ -15,7 +15,7 @@ describe('queue test', () => {
 
     cy.clock()
 
-    cy.visit('http://localhost:3000/queue')
+    cy.visit('queue')
     cy.get('input').type('1')
     cy.get('button').eq(1).as('addButton').click()
 
@@ -41,7 +41,7 @@ describe('queue test', () => {
 
     cy.clock()
 
-    cy.visit('http://localhost:3000/queue')
+    cy.visit('queue')
     cy.get('input').type('1')
     cy.get('button').eq(1).as('addButton').click()
 
@@ -71,7 +71,7 @@ describe('queue test', () => {
 
     cy.clock()
 
-    cy.visit('http://localhost:3000/queue')
+    cy.visit('queue')
     cy.get('input').type('1')
     cy.get('button').eq(1).as('addButton').click()
 

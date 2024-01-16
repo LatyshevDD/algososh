@@ -1,7 +1,7 @@
 describe('fibonacci test', () => {
 
   it('checking button disabled', () => {
-    cy.visit('http://localhost:3000/fibonacci')
+    cy.visit('fibonacci')
     cy.get('input').should('have.value', '')
     cy.get('button').should('be.disabled')
 
@@ -10,7 +10,7 @@ describe('fibonacci test', () => {
   it('fibonacci algorithm', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/fibonacci')
+    cy.visit('fibonacci')
     cy.get('input').type('5')
     cy.get('button').eq(1).click()
 

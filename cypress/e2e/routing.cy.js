@@ -1,36 +1,36 @@
 describe('routing test', () => {
   
   beforeEach(() => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
   });
 
   it('string page routing test', () => {
-    cy.visit('http://localhost:3000/recursion')
+    cy.visit('recursion')
     cy.contains('Строка')
   })
 
   it('fibonacci page routing test', () => {
-    cy.visit('http://localhost:3000/fibonacci')
+    cy.visit('fibonacci')
     cy.contains('Фибоначчи')
   })
 
   it('sorting page routing test', () => {
-    cy.visit('http://localhost:3000/sorting')
+    cy.visit('sorting')
     cy.contains('Сортировка массива')
   })
 
   it('stack page routing test', () => {
-    cy.visit('http://localhost:3000/stack')
+    cy.visit('stack')
     cy.contains('Стек')
   })
 
   it('queue page routing test', () => {
-    cy.visit('http://localhost:3000/queue')
+    cy.visit('queue')
     cy.contains('Очередь')
   })
 
   it('list page routing test', () => {
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.contains('Связный список')
   })
 

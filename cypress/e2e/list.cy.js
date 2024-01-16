@@ -5,7 +5,7 @@ describe('list test', () => {
   // modified: 4px solid rgb(127, 224, 81);
 
   it('checking button disabled', () => {
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('button').filter(':contains("Добавить в head")').as('addHeadButton')
     cy.get('button').filter(':contains("Добавить в tail")').as('addTailButton')
     cy.get('button').filter(':contains("Добавить по индексу")').as('addIndexButton')
@@ -19,7 +19,7 @@ describe('list test', () => {
   })
 
   it('test initial array', () => {
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('[class*=lis-page_circles]').as('circleContainer')
     cy.get('@circleContainer').children('[class*=content]').should('have.length', 4).each(($circle, index) => {
       if (index === 0) {
@@ -59,7 +59,7 @@ describe('list test', () => {
   it('test add element in head', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('input').filter('[placeholder="Введите текст"]').type('1')
     cy.get('button').filter(':contains("Добавить в head")').as('addHeadButton').click()
     cy.get('[class*=lis-page_circles]').as('circleContainer')
@@ -87,7 +87,7 @@ describe('list test', () => {
   it('test add element in tail', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('input').filter('[placeholder="Введите текст"]').type('2')
     cy.get('button').filter(':contains("Добавить в tail")').as('addTailButton').click()
     cy.get('[class*=lis-page_circles]').as('circleContainer')
@@ -116,7 +116,7 @@ describe('list test', () => {
   it('test add element by index', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('input').filter('[placeholder="Введите текст"]').type('3')
     cy.get('input').filter('[placeholder="Введите индекс"]').type('2')
     cy.get('button').filter(':contains("Добавить по индексу")').as('addIndexButton').click()
@@ -208,7 +208,7 @@ describe('list test', () => {
   it('test delete element from head', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('input').filter('[placeholder="Введите текст"]').type('1')
     cy.get('button').filter(':contains("Добавить в head")').as('addTailButton').click()
 
@@ -240,7 +240,7 @@ describe('list test', () => {
   it('test delete element from tail', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('input').filter('[placeholder="Введите текст"]').type('2')
     cy.get('button').filter(':contains("Добавить в tail")').as('addTailButton').click()
 
@@ -272,7 +272,7 @@ describe('list test', () => {
   it('test delete by index', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/list')
+    cy.visit('list')
     cy.get('input').filter('[placeholder="Введите текст"]').type('3')
     cy.get('input').filter('[placeholder="Введите индекс"]').type('2')
     cy.get('button').filter(':contains("Добавить по индексу")').as('addIndexButton').click()

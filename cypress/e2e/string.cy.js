@@ -1,7 +1,7 @@
 describe('string test', () => {
 
   it('checking button disabled', () => {
-    cy.visit('http://localhost:3000/recursion')
+    cy.visit('recursion')
     cy.get('input').should('have.value', '')
     cy.get('button').should('be.disabled')
 
@@ -10,7 +10,7 @@ describe('string test', () => {
   it('string algorithm', () => {
     cy.clock()
 
-    cy.visit('http://localhost:3000/recursion')
+    cy.visit('recursion')
     cy.get('input').type('string')
     cy.get('button').eq(1).click()
 

@@ -5,7 +5,7 @@ describe('stack test', () => {
   // modified: 4px solid rgb(127, 224, 81);
 
   it('checking button disabled', () => {
-    cy.visit('http://localhost:3000/stack')
+    cy.visit('stack')
     cy.get('button').eq(1).as('addButton')
     cy.get('input').should('have.value', '')
     cy.get('@addButton').should('be.disabled')
@@ -15,7 +15,7 @@ describe('stack test', () => {
 
     cy.clock()
 
-    cy.visit('http://localhost:3000/stack')
+    cy.visit('stack')
     cy.get('input').type('1')
     cy.get('button').eq(1).as('addButton').click()
 
@@ -83,7 +83,7 @@ describe('stack test', () => {
 
     cy.clock()
 
-    cy.visit('http://localhost:3000/stack')
+    cy.visit('stack')
     cy.get('input').type('1')
     cy.get('button').eq(1).as('addButton').click()
 
@@ -130,7 +130,7 @@ describe('stack test', () => {
 
     cy.clock()
 
-    cy.visit('http://localhost:3000/stack')
+    cy.visit('stack')
     cy.get('input').type('1')
     cy.get('button').eq(1).as('addButton').click()
 
