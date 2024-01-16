@@ -208,7 +208,7 @@ export const ListPage: React.FC = () => {
               extraClass={styles.flex_grow}
               onClick={handleAddByIndex}
               isLoader={addByIndexLoader}
-              disabled={disableInterface || index < 0}
+              disabled={disableInterface || index < 0 || !string.length}
             />
             <Button 
               type='button' 
