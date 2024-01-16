@@ -269,7 +269,136 @@ describe('list test', () => {
     cy.get('@lasttElement').find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
   })
 
+  it('test delete by index', () => {
+    cy.clock()
 
+    cy.visit('http://localhost:3000/list')
+    cy.get('input').filter('[placeholder="Введите текст"]').type('3')
+    cy.get('input').filter('[placeholder="Введите индекс"]').type('2')
+    cy.get('button').filter(':contains("Добавить по индексу")').as('addIndexButton').click()
+  
+    cy.tick(500)
 
+    cy.tick(500)
 
+    cy.tick(500)
+
+    cy.tick(500)
+
+    cy.tick(500)
+
+    cy.get('input').filter('[placeholder="Введите индекс"]').type('2')
+    cy.get('button').filter(':contains("Удалить по индексу")').click()
+
+    cy.tick(500)
+
+    cy.get('[class*=lis-page_circles]').as('circleContainer')
+
+    cy.get('@circleContainer').children('[class*=content]').should('have.length', 5).each(($circle, index) => {
+      if(index === 0) {
+        cy.wrap($circle).find('[class*=index]').contains('0')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*=head]').contains('head')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 1) {
+        cy.wrap($circle).find('[class*=index]').contains('1')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 2) {
+        cy.wrap($circle).find('[class*=index]').contains('2')
+        cy.wrap($circle).find('[class*=text_type_circle]').contains('3')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+    })
+
+    cy.tick(500)
+
+    cy.get('@circleContainer').children('[class*=content]').should('have.length', 5).each(($circle, index) => {
+      if(index === 0) {
+        cy.wrap($circle).find('[class*=index]').contains('0')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*=head]').contains('head')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 1) {
+        cy.wrap($circle).find('[class*=index]').contains('1')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 2) {
+        cy.wrap($circle).find('[class*=index]').contains('2')
+        cy.wrap($circle).find('[class*=text_type_circle]').contains('3')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+    })
+
+    cy.tick(500)
+
+    cy.get('@circleContainer').children('[class*=content]').should('have.length', 5).each(($circle, index) => {
+      if(index === 0) {
+        cy.wrap($circle).find('[class*=index]').contains('0')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*=head]').contains('head')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 1) {
+        cy.wrap($circle).find('[class*=index]').contains('1')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 2) {
+        cy.wrap($circle).find('[class*=index]').contains('2')
+        cy.wrap($circle).find('[class*=text_type_circle]').contains('3')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+    })
+
+    cy.tick(500)
+
+    cy.get('@circleContainer').children('[class*=content]').should('have.length', 5).each(($circle, index) => {
+      if(index === 0) {
+        cy.wrap($circle).find('[class*=index]').contains('0')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        cy.wrap($circle).find('[class*=head]').contains('head')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 1) {
+        cy.wrap($circle).find('[class*=index]').contains('1')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*=tail]').should('be.empty')
+      }
+
+      if(index === 2) {
+        cy.wrap($circle).find('[class*=index]').contains('2')
+        cy.wrap($circle).find('[class*=text_type_circle]').should('be.empty')
+        cy.wrap($circle).find('[class*=circle_circle]').should('have.css', 'border', '4px solid rgb(0, 50, 255)')
+        cy.wrap($circle).find('[class*=head]').should('be.empty')
+        cy.wrap($circle).find('[class*="small"]').should('have.css', 'border', '4px solid rgb(210, 82, 225)')
+        cy.wrap($circle).find('[class*="small"]').contains('3')
+      }
+    })
+
+    cy.tick(500)
+
+    cy.get('@circleContainer').children('[class*=content]').should('have.length', 4)
+  })
 })
