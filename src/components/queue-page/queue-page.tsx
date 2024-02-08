@@ -81,7 +81,7 @@ export const QueuePage: React.FC = () => {
               type='submit' 
               text='Добавить'
               isLoader={addLoader}
-              disabled={deleateLoader || clearLoader}
+              disabled={deleateLoader || clearLoader || !string.length}
             />
             <Button 
               type='button' 

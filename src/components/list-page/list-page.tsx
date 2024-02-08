@@ -168,14 +168,14 @@ export const ListPage: React.FC = () => {
               text='Добавить в head'
               onClick={handleAddHead}
               isLoader={addHeadLoader}
-              disabled={disableInterface}
+              disabled={disableInterface || !string.length}
             />
             <Button 
               type='button' 
               text='Добавить в tail'
               onClick={handleAddTail}
               isLoader={addTailLoader}
-              disabled={disableInterface}
+              disabled={disableInterface || !string.length}
             />
             <Button 
               type='button' 
@@ -208,7 +208,7 @@ export const ListPage: React.FC = () => {
               extraClass={styles.flex_grow}
               onClick={handleAddByIndex}
               isLoader={addByIndexLoader}
-              disabled={disableInterface}
+              disabled={disableInterface || index < 0 || !string.length}
             />
             <Button 
               type='button' 
@@ -216,7 +216,7 @@ export const ListPage: React.FC = () => {
               extraClass={styles.flex_grow}
               onClick={handleDeleteByIndex}
               isLoader={deleteByIndexLoader}
-              disabled={disableInterface}
+              disabled={disableInterface || index < 0}
             />
           </div>
           <div className={styles.circles}>
@@ -245,7 +245,7 @@ export const ListPage: React.FC = () => {
                   )
                 }
                 return (
-                  <div className={styles.circle} key={index}>
+                  <div className={styles.circle_content} key={index}>
                     <Circle 
                       letter={index === tailNode ? '' : item}
                       index={index}
